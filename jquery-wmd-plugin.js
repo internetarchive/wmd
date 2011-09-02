@@ -8,7 +8,7 @@
     $.fn.wmd = function(_options) {
         this.each(function() {
             var defaults = {"preview": true};
-            var options = $.extend({}, _options || {}, defaults);
+            var options = $.extend({}, defaults, _options || {});
             
             if (!options.button_bar) {
                 options.button_bar = "wmd-button-bar-" + counter;
