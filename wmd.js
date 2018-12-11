@@ -1251,7 +1251,6 @@ var UndoManager = function(textarea, pastePollInterval, callback){ // {{{
 WMDEditor.util = util;
 WMDEditor.position = position;
 WMDEditor.TextareaState = TextareaState;
-WMDEditor.Checks = Checks;
 WMDEditor.InputPoller = InputPoller;
 WMDEditor.PreviewManager = PreviewManager;
 WMDEditor.UndoManager = UndoManager;
