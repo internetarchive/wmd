@@ -1,4 +1,4 @@
-#!/usr/bin/python
+#!/usr/bin/env python
 
 # This code is original from jsmin by Douglas Crockford, it was translated to
 # Python by Baruch Even. The original code had the following copyright and
@@ -30,7 +30,11 @@
 # SOFTWARE.
 # */
 
-from StringIO import StringIO
+try:
+    from StringIO import StringIO
+except ImportError:
+    from io import StringIO
+
 
 def jsmin(js):
     ins = StringIO(js)
