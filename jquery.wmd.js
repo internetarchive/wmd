@@ -3644,3 +3644,5 @@ var Showdown = Attacklab.showdown;
 if (Attacklab.fileLoaded) {
 	Attacklab.fileLoaded("showdown.js");
 }
+
+window.Attacklab = Attacklab;
