@@ -1,0 +1,16 @@
+name: javascript_tests
+on: [pull_request, push]
+jobs:
+  javascript_tests:
+    runs-on: ubuntu-latest
+    steps:
+      - uses: actions/checkout@v2
+      - uses: actions/setup-node@v2
+        with:
+          node-version: '14'
+      - run: npm install
+      # - run: npm run lint
+      - run: make all
+      # - run: npm run test
+      - run: npm install -g html-validate
+      - run: html-validate .
