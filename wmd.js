@@ -1,6 +1,6 @@
 ;(function() {
     
-WMDEditor = function(options) {
+var WMDEditor = function(options) {
     this.options = WMDEditor.util.extend({}, WMDEditor.defaults, options || {});
     wmdBase(this, this.options);
 
