@@ -831,7 +831,41 @@ var PreviewManager = function(wmd){ // {{{
         
         return result;
     };
-    
+
+    var sanitizeHtmlAttrs = function(htmlText) {
+        var allowedAttrs = [
+            'alt', 'colspan', 'height', 'href', 'rowspan', 'src', 'srcset',  'target', 'title', 'width',
+        ];
+
+        // parse the html and remove any unallowed attrs
+        var parser = new DOMParser();
+        var doc = parser.parseFromString(htmlText, 'text/html');
+        // domwalk the dom
+        /**
+         * @param {Element} node
+         */
+        var walk = function(node) {
+            var attrs = node.attributes;
+            var toRemove = [];
+            for (var i = 0; i < attrs.length; i++) {
+                var attr = attrs[i];
+                if (!allowedAttrs.includes(attr.name)) {
+                    toRemove.push(attr.name);
+                }
+            }
+            for (var i = 0; i < toRemove.length; i++) {
+                node.removeAttribute(toRemove[i]);
+            }
+        };
+        var walker = document.createTreeWalker(doc, NodeFilter.SHOW_ELEMENT, null, false);
+        while (walker.nextNode()) {
+            walk(walker.currentNode);
+        }
+
+        // return the sanitized html
+        return doc.body.innerHTML;
+    };
+
     var makePreviewHtml = function(){
     
         // If there are no registered preview and output panels
@@ -959,7 +993,7 @@ var PreviewManager = function(wmd){ // {{{
         }
         
         if (wmd.panels.preview) {
-            wmd.panels.preview.innerHTML = text;
+            wmd.panels.preview.innerHTML = sanitizeHtmlAttrs(text);
         }
         
         setPanelScrollTops();
